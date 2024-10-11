@@ -41,7 +41,7 @@ if 'button_labels' not in st.session_state:
     st.session_state.button_labels = []
 
 # Button to start the analysis
-if st.button("Start Analysis"):
+if st.button("Get Topology Proposal"):
     with st.spinner("Thinking..."):
         response = chat_with_openai(st.session_state.messages)
     st.session_state.button_labels = response.split(";")
