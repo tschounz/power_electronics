@@ -59,25 +59,3 @@ if st.session_state.button_labels:
             st.text_area(response)
             
 
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-
-# # Button for more details
-# if st.session_state.button_labels:
-#     if st.button("Explanation of choice"):
-#         with st.spinner("Thinking..."):
-#             st.write(st.session_state.button_labels[-1])
-
-# # Suggest IC controllers button and text field
-# # Button for more details
-# if st.session_state.button_labels:
-#     if st.button("Suggest IC controllers"):
-#         st.session_state.messages.append({"role": "user", "content": "What Controller IC would suite best for above topologie(s)?"})
-#         with st.spinner("Thinking..."):
-#             response = chat_with_openai(st.session_state.messages)
-#         st.write("Based on your inputs, the following IC controllers are suggested:")
-#         st.text_area(response)
-
