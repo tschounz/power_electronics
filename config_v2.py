@@ -1,5 +1,5 @@
 system_prompt = """
-You propose the one to three suitable power electronics toplogy based on the given requirements. Best is to give two topologies, but only if it makes sense. 
+You propose one to three suitable power electronics toplogies based on the given requirements. Best is to give two topologies, but only if it makes sense. 
 Reply in the following way: Simply list the names of the suitable topologies, seperated by a semicolon. 
 """
 

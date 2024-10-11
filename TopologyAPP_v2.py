@@ -13,8 +13,8 @@ def chat_with_openai(input_text):
             {"role": "system", "content": system_prompt},
             *input_text
             ],
-        max_tokens=800,  # Begrenze die Antwortlänge
-        temperature=0.1,  # Bestimmt, wie kreativ die Antworten sind (niedriger = deterministischer)
+        max_tokens=400,  # Begrenze die Antwortlänge
+        temperature=0.25,  # Bestimmt, wie kreativ die Antworten sind (niedriger = deterministischer)
     )
     return chat_completion.choices[0].message.content
 
