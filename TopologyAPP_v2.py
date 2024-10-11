@@ -19,7 +19,7 @@ def chat_with_openai(input_text):
     return chat_completion.choices[0].message.content
 
 # Title for the app
-st.title("Topology Selector")
+st.title("Topology Finder")
 if 'messages' not in st.session_state:
     st.session_state['messages'] = [
         {"role": "system", "content": greeting}
