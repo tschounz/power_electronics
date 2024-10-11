@@ -4,7 +4,7 @@ from openai import OpenAI
 from config_v2 import *
 
 #client = OpenAI(api_key=open("./source/llm/keys.txt", "r").read().strip())
-client = OpenAI(api_key=DB_TOKEN)
+client = OpenAI(api_key=st.secrets["DB_TOKEN"])
 
 def chat_with_openai(input_text):
     chat_completion = client.chat.completions.create(
