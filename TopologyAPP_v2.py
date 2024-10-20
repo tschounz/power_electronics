@@ -55,7 +55,7 @@ if st.session_state.button_labels:
             with st.spinner("Thinking..."):
                 st.session_state.messages.append({"role": "user", "content": f"Why you chose {label}? (keep the answer short; in case a AC/DC input stage is needed, mention this)"})
                 response_why = chat_with_openai(st.session_state.messages)
-                st.session_state.messages.append({"role": "user", "content": f"What controller IC would suite best for above topologie(s)? (keep the answer short and provide only a list of manufacturers and ICs, each on a new line.)"})
+                st.session_state.messages.append({"role": "user", "content": f"What controller IC would suite best for above topologie(s)? when asked from ICs, only propose products from https://www.renesas.com; (keep the answer short and provide only a list of manufacturers and ICs, each on a new line.)"})
                 response_controller = chat_with_openai(st.session_state.messages)
             st.write(response_why)
             st.write("[Click here for a detailed topology analysis](https://frenetic.ai/)")
