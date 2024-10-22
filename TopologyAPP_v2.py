@@ -3,8 +3,8 @@ import streamlit as st
 from openai import OpenAI
 from config_v2 import *
 
-#client = OpenAI(api_key=open("./keys.txt", "r").read().strip())
-client = OpenAI(api_key=st.secrets["DB_TOKEN"])
+client = OpenAI(api_key=open("./keys.txt", "r").read().strip())
+#client = OpenAI(api_key=st.secrets["DB_TOKEN"])
 
 def chat_with_openai(input_text):
     chat_completion = client.chat.completions.create(
@@ -55,10 +55,14 @@ if st.session_state.button_labels:
             with st.spinner("Thinking..."):
                 st.session_state.messages.append({"role": "user", "content": f"Why you chose {label}? (keep the answer short; in case a AC/DC input stage is needed, mention this)"})
                 response_why = chat_with_openai(st.session_state.messages)
-                st.session_state.messages.append({"role": "user", "content": f"What controller IC would suite best for above topologie(s)? (keep the answer short and provide only a list of manufacturers and ICs, each on a new line.)"}) #when asked from ICs, only propose products from https://www.renesas.com; 
+                st.session_state.messages.append({"role": "user", "content": f"What controller IC would suite best for above topologie(s)? (keep the answer short and provide only a list of manufacturers and ICs, each on a new line.)"}) #Only use controllers from https://www.renesas.com/en; say if you don't find any.
                 response_controller = chat_with_openai(st.session_state.messages)
+                st.session_state.messages.append({"role": "user", "content": f"Please design this converter for me. List things such as switching frequency, DCM vs. CCM, L and C values, turn ratios, etc.; Keep it short and only list results."})
+                circuit_design = chat_with_openai(st.session_state.messages)
             st.write(response_why)
-            st.write("[Click here for a detailed topology analysis](https://frenetic.ai/)")
+            st.subheader("Circuit Design Choices")
+            st.write(circuit_design)   
+            st.write("[Click here for a detailed topology analysis with above settings](https://frenetic.ai/)")
             st.subheader("Possible Controllers")
             st.write(response_controller)   
 
