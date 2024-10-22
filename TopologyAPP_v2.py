@@ -8,13 +8,14 @@ client = OpenAI(api_key=st.secrets["DB_TOKEN"])
 
 def chat_with_openai(input_text):
     chat_completion = client.chat.completions.create(
-        model="gpt-4o",
+        model="o1-preview-2024-09-12",
         messages=[
-            {"role": "system", "content": system_prompt},
+            #{"role": "system", "content": system_prompt},
+            {"role": "user", "content": system_prompt},
             *input_text
             ],
-        max_tokens=400,  # Begrenze die Antwortlänge
-        temperature=0.25,  # Bestimmt, wie kreativ die Antworten sind (niedriger = deterministischer)
+        #max_completion_tokens=400,  # Begrenze die Antwortlänge
+        #temperature=0.25,  # Bestimmt, wie kreativ die Antworten sind (niedriger = deterministischer)
     )
     return chat_completion.choices[0].message.content
 
@@ -22,7 +23,8 @@ def chat_with_openai(input_text):
 st.title("Topology Finder")
 if 'messages' not in st.session_state:
     st.session_state['messages'] = [
-        {"role": "system", "content": greeting}
+        #{"role": "system", "content": greeting}
+        {"role": "user", "content": greeting}
     ]
 
 # Text
@@ -44,9 +46,11 @@ if 'button_labels' not in st.session_state:
 if st.button("Get Topology Proposal"):
     with st.spinner("Thinking..."):
         response = chat_with_openai(st.session_state.messages)
+        print(response)
     st.session_state.button_labels = response.split(";")
     j = len(st.session_state.button_labels)
     #print(st.session_state.button_labels)
+    
 
 if st.session_state.button_labels:
     st.write("The topologies that suite your requirements best are:")
