@@ -46,7 +46,7 @@ if 'button_labels' not in st.session_state:
 if st.button("Get Topology Proposal"):
     with st.spinner("Thinking..."):
         response = chat_with_openai(st.session_state.messages)
-        print("r",response)
+        print(response)
     st.session_state.button_labels = response.split(";")
     j = len(st.session_state.button_labels)
     #print(st.session_state.button_labels)
@@ -66,7 +66,7 @@ if st.session_state.button_labels:
                 circuit_design = chat_with_openai(st.session_state.messages)
             st.write(response_why)
             st.subheader("Circuit Design Choices")
-            st.write(circuit_design)   
+            st.write("r",circuit_design)   
             st.write("[Click here for a detailed topology analysis with above settings](https://frenetic.ai/)")
             st.subheader("Possible Controllers")
             st.write(response_controller)   
