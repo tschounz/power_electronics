@@ -48,7 +48,7 @@ if st.button("Get Topology Proposal"):
 if st.session_state.button_labels:
     st.write("The topologies that suite your requirements best are:")
     for label in st.session_state.button_labels:
-        if st.button(label + "\n(Click to get a converter design)"):
+        if st.button(label):
             with st.spinner("Thinking..."):
                 st.session_state.messages.append({"role": "user", "content": f"Why you chose {label}? (keep the answer short; in case a AC/DC input stage is needed, mention this)"})
                 response_why = chat_with_openai(st.session_state.messages)
