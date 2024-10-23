@@ -48,7 +48,7 @@ if st.sidebar.button("Suggest Topology"):
     j = len(st.session_state.button_labels)
 
 if st.session_state.button_labels:
-    st.write("The topologies that suite your requirements best are:")
+    st.write("The topologies that suite your requirements best are (click for more details):")
     for label in st.session_state.button_labels:
         if st.button(label):
             with st.spinner("Thinking..."):
