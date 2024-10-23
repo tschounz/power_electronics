@@ -66,7 +66,7 @@ if st.session_state.button_labels:
                 circuit_design = chat_with_openai(st.session_state.messages)
             st.write(response_why)
             st.subheader("Circuit Design Choices")
-            #st.latex(circuit_design)
+            st.latex(r" ")
             st.write(circuit_design)   
             st.write("[Click here for a detailed topology analysis with above settings](https://frenetic.ai/)")
             st.subheader("Possible Controllers")
