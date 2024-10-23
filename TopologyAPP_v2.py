@@ -20,7 +20,6 @@ def chat_with_openai(input_text):
     return chat_completion.choices[0].message.content
 
 # Title for the app
-st.latex(r" ") #this is needed in order that streamlit interprets latex correctly
 st.title("Topology Finder")
 if 'messages' not in st.session_state:
     st.session_state['messages'] = [
@@ -67,6 +66,7 @@ if st.session_state.button_labels:
                 circuit_design = chat_with_openai(st.session_state.messages)
             st.write(response_why)
             st.subheader("Circuit Design Choices")
+            st.latex(r" ") #this is needed in order that streamlit interprets latex correctly
             st.write(circuit_design)   
             st.write("[Click here for a detailed topology analysis with above settings](https://frenetic.ai/)")
             st.subheader("Possible Controllers")
