@@ -46,7 +46,7 @@ if 'button_labels' not in st.session_state:
 if st.button("Get Topology Proposal"):
     with st.spinner("Thinking..."):
         response = chat_with_openai(st.session_state.messages)
-        print(response)
+        print("r",response)
     st.session_state.button_labels = response.split(";")
     j = len(st.session_state.button_labels)
     #print(st.session_state.button_labels)
