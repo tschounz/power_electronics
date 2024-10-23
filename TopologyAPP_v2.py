@@ -41,14 +41,14 @@ if 'button_labels' not in st.session_state:
 if st.button("Get Topology Proposal"):
     with st.spinner("Thinking..."):
         response = chat_with_openai(st.session_state.messages)
-        print(response)
+        #print(response)
     st.session_state.button_labels = response.split(";")
     j = len(st.session_state.button_labels)
 
 if st.session_state.button_labels:
     st.write("The topologies that suite your requirements best are:")
     for label in st.session_state.button_labels:
-        if st.button(label):
+        if st.button(label + "(Click to get a converter design)"):
             with st.spinner("Thinking..."):
                 st.session_state.messages.append({"role": "user", "content": f"Why you chose {label}? (keep the answer short; in case a AC/DC input stage is needed, mention this)"})
                 response_why = chat_with_openai(st.session_state.messages)
