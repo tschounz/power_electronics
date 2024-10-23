@@ -1,21 +1,17 @@
-#platform.openai.com
 import streamlit as st
 from openai import OpenAI
 from config_v2 import *
 
-#client = OpenAI(api_key=open("./keys.txt", "r").read().strip())
-client = OpenAI(api_key=st.secrets["DB_TOKEN"])
+client = OpenAI(api_key=open("./keys.txt", "r").read().strip())
+#client = OpenAI(api_key=st.secrets["DB_TOKEN"])
 
 def chat_with_openai(input_text):
     chat_completion = client.chat.completions.create(
         model="o1-preview-2024-09-12",
         messages=[
-            #{"role": "system", "content": system_prompt},
             {"role": "user", "content": system_prompt},
             *input_text
             ],
-        #max_completion_tokens=400,  # Begrenze die Antwortlänge
-        #temperature=0.25,  # Bestimmt, wie kreativ die Antworten sind (niedriger = deterministischer)
     )
     return chat_completion.choices[0].message.content
 
@@ -23,7 +19,6 @@ def chat_with_openai(input_text):
 st.title("Topology Finder")
 if 'messages' not in st.session_state:
     st.session_state['messages'] = [
-        #{"role": "system", "content": greeting}
         {"role": "user", "content": greeting}
     ]
 
@@ -49,8 +44,6 @@ if st.button("Get Topology Proposal"):
         print(response)
     st.session_state.button_labels = response.split(";")
     j = len(st.session_state.button_labels)
-    #print(st.session_state.button_labels)
-    
 
 if st.session_state.button_labels:
     st.write("The topologies that suite your requirements best are:")
@@ -61,13 +54,11 @@ if st.session_state.button_labels:
                 response_why = chat_with_openai(st.session_state.messages)
                 st.session_state.messages.append({"role": "user", "content": f"What controller IC would suite best for above topologie(s)? (keep the answer short and provide only a list of manufacturers and ICs, each on a new line.)"}) #Only use controllers from https://www.renesas.com/en; say if you don't find any.
                 response_controller = chat_with_openai(st.session_state.messages)
-                #st.session_state.messages.append({"role": "user", "content": f"Please design this converter for me. List things such as switching frequency, DCM vs. CCM, L and C values, turn ratios, etc.; Keep it short and only list results."})
                 st.session_state.messages.append({"role": "user", "content": f"Please design this converter for me. List things such as switching frequency, DCM vs. CCM, L and C values, turn ratios, etc.; Keep it short and only list results. always build a table that has multiple options of switching frequency, duty cycle and turns ratio as parameters, and show the related other parameters (output/input current, magnetizing inductance, and other if applicable). Only show feasable designs. if some parameters are not important for a topology, ignore it."})
                 circuit_design = chat_with_openai(st.session_state.messages)
             st.write(response_why)
             st.subheader("Circuit Design Choices")
-            st.latex(r" ") #this is needed in order that streamlit interprets latex correctly
-            st.write(circuit_design)   
+            st.markdown(circuit_design)   
             st.write("[Click here for a detailed topology analysis with above settings](https://frenetic.ai/)")
             st.subheader("Possible Controllers")
             st.write(response_controller)   
