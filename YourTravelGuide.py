@@ -5,7 +5,11 @@ from TravelConfig import *
 #client = OpenAI(api_key=open("./keys.txt", "r").read().strip())
 client = OpenAI(api_key=st.secrets["DB_TOKEN"])
 
-initial_sidebar_state="expanded"
+st.set_page_config(
+    page_title="Your Travel Agent",
+    #layout="wide",
+    initial_sidebar_state="expanded"  # This expands the sidebar
+)
 
 def chat_with_openai(input_text):
     chat_completion = client.chat.completions.create(
@@ -25,7 +29,7 @@ if 'messages' not in st.session_state:
     ]
 
 # Sidebar for input parameters
-st.sidebar.title("Your Travel Agent")
+#st.sidebar.title("Your Travel Agent")
 #st.sidebar.header("")
 #st.sidebar.markdown("Please do not forget to indicate whether it is AC or DC. Alternatively, you can mention a standard like USB-C instead of a voltage value.")
 
