@@ -5,6 +5,8 @@ from TravelConfig import *
 #client = OpenAI(api_key=open("./keys.txt", "r").read().strip())
 client = OpenAI(api_key=st.secrets["DB_TOKEN"])
 
+initial_sidebar_state="expanded"
+
 def chat_with_openai(input_text):
     chat_completion = client.chat.completions.create(
         model="o1-preview-2024-09-12",
