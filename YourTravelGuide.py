@@ -2,8 +2,8 @@ import streamlit as st
 from openai import OpenAI
 from TravelConfig import *
 
-client = OpenAI(api_key=open("./keys.txt", "r").read().strip())
-#client = OpenAI(api_key=st.secrets["DB_TOKEN"])
+#client = OpenAI(api_key=open("./keys.txt", "r").read().strip())
+client = OpenAI(api_key=st.secrets["DB_TOKEN"])
 
 def chat_with_openai(input_text):
     chat_completion = client.chat.completions.create(
