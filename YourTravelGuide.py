@@ -28,6 +28,10 @@ if 'messages' not in st.session_state:
         {"role": "user", "content": greeting}
     ]
 
+# Sidebar for input parameters
+
+st.sidebar.title("Your Travel Agent")
+
 # Input fields
 where = st.sidebar.text_input("Where do you want to go? Tell me as much as you think is of interest for me to plan your trip.", "")
 duration = st.sidebar.text_input("How long will your trip be?", "")
